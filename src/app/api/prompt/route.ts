@@ -4,14 +4,13 @@ import { NextRequest } from "next/server";
 
 export const GET = async (request: NextRequest) => {
 	try {
-		const searchString = request.nextUrl.searchParams.get("search");
+		const searchString = await request.nextUrl.searchParams.get("search");
 
 		await connectToDB();
 
 		let prompts: any[] = [];
 
 		if (searchString) {
-			console.log("searching posts", searchString);
 			prompts = await getFilteredPosts(searchString);
 		}
 		else {
