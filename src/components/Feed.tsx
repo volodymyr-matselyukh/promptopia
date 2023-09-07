@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import PromptCard from "./PromptCard";
 import PromptCardList from "./PromptCardList";
 import { Post } from "./models/Post";
 import Link from "next/link";
@@ -36,7 +35,7 @@ const Feed = (props: Props) => {
 
 	useEffect(() => {
 		const fetchPosts = async () => {
-			const response = await fetch(`/api/prompt?search=${searchText}`);
+			const response = await fetch(`/api/prompts/${searchText ? searchText : "all"}`);
 			const data = await response.json();
 			setPosts(data);
 		}

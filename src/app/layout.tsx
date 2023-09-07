@@ -2,6 +2,7 @@ import "../styles/global.css";
 import Nav from "@/components/Nav";
 import Provider from "@/components/Provider";
 import { Session } from "next-auth";
+export const dynamic = 'force-dynamic'
 
 export const metadata = {
 	title: "Promtopia",

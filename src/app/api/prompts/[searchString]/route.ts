@@ -1,20 +1,23 @@
 import Prompt from "@/models/Prompt";
+import User from "@/models/User";
 import { connectToDB } from "@/utils/database"
 import { NextRequest } from "next/server";
 
-export const GET = async (request: NextRequest) => {
+export const GET = async (request: NextRequest, {params}: any) => {
 	try {
-		const searchString = request.nextUrl.searchParams.get("search");
-
 		await connectToDB();
+
+		const {searchString} = params;
+
+		console.log("search string", searchString);
 
 		let prompts: any[] = [];
 
-		if (searchString) {
-			prompts = await getFilteredPosts(searchString);
+		if (searchString === "all") {
+			prompts = await getAllPosts();
 		}
 		else {
-			prompts = await getAllPosts();
+			prompts = await getFilteredPosts(searchString);
 		}
 
 		return new Response(JSON.stringify(prompts),
@@ -33,6 +36,7 @@ export const GET = async (request: NextRequest) => {
 
 const getFilteredPosts = async (searchString: string) => {
 
+	let dummyUser = User.find();
 	let prompts = await Prompt.aggregate([
 		{
 			$lookup: {
