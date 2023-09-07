@@ -50,7 +50,7 @@ const Feed = (props: Props) => {
 
 	return (
 		<section className="feed">
-			<form className="relative w-full flex-center">
+			<div className="relative w-full flex-center">
 				<input
 					ref={searchInput}
 					type="text"
@@ -66,7 +66,7 @@ const Feed = (props: Props) => {
 				>
 					Clear
 				</Link>
-			</form>
+			</div>
 
 			<PromptCardList 
 				data={posts}

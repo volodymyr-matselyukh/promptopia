@@ -4,7 +4,7 @@ import { NextRequest } from "next/server";
 
 export const GET = async (request: NextRequest) => {
 	try {
-		const searchString = await request.nextUrl.searchParams.get("search");
+		const searchString = request.nextUrl.searchParams.get("search");
 
 		await connectToDB();
 
@@ -14,7 +14,6 @@ export const GET = async (request: NextRequest) => {
 			prompts = await getFilteredPosts(searchString);
 		}
 		else {
-			console.log("getting all posts");
 			prompts = await getAllPosts();
 		}
 
